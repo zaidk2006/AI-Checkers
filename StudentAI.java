@@ -1,6 +1,6 @@
 import java.util.Random;
 import java.util.Vector;
-// penis
+
 // The following part should be completed by students.
 // Students can modify anything except the class name and exisiting functions and varibles.
 
