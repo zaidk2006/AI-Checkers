@@ -27,3 +27,8 @@ public class StudentAI extends AI {
         return resMove;
     }
 }
+
+/*
+ * Compute difference of checkers count for each possible move, count King as 2 (Ours - Opponent) 
+ * Choose move with highest value
+ */
