@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Vector;
+import java.util.ArrayList;
 
 // The following part should be completed by students.
 // Students can modify anything except the class name and exisiting functions and varibles.
@@ -24,9 +25,39 @@ public class StudentAI extends AI {
         int index = randGen.nextInt(moves.size());
         int innerIndex = randGen.nextInt(moves.get(index).size());
         Move resMove = moves.get(index).get(innerIndex);
+	    //Move resMove = ChooseBestMove(moves);
         board.makeMove(resMove, player);
         return resMove;
+		
     }
+	
+	public Move ChooseBestMove(Vector<Vector<Move>> moves) throws InvalidMoveError {
+		ArrayList<Integer> moveScore = new ArrayList<>();
+		int max = -500;
+		int index = -1; 
+		int innerIndex = -1;
+		int i = 0;
+		int j = 0;
+		for(Vector<Move> vector : moves) {
+			for(Move move : vector) {
+				board.makeMove(move, player);
+				int score = board.whiteCount - board.blackCount;
+				moveScore.add(score);
+				if(score > max) {
+					max = score;
+					index = i;
+					innerIndex = j;
+				}
+				board.Undo();
+				j++;
+			}
+			i++;
+		}
+		
+		
+		Move bestMove = moves.get(index).get(innerIndex);
+		return bestMove;
+	}
 }
 
 /*
