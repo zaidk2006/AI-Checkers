@@ -21,18 +21,17 @@ public class StudentAI extends AI {
             player = 1;
         Vector<Vector<Move>> moves = board.getAllPossibleMoves(player);
 	//im commitng right here
-        Random randGen = new Random();
-        int index = randGen.nextInt(moves.size());
-        int innerIndex = randGen.nextInt(moves.get(index).size());
-        Move resMove = moves.get(index).get(innerIndex);
-	    //Move resMove = ChooseBestMove(moves);
+        //Random randGen = new Random();
+        //int index = randGen.nextInt(moves.size());
+        //int innerIndex = randGen.nextInt(moves.get(index).size());
+        Move resMove = ChooseBestMove(moves);
         board.makeMove(resMove, player);
         return resMove;
 		
     }
 	
 	public Move ChooseBestMove(Vector<Vector<Move>> moves) throws InvalidMoveError {
-		ArrayList<Integer> moveScore = new ArrayList<>();
+		//ArrayList<Integer> moveScore = new ArrayList<>();
 		int max = -500;
 		int index = -1; 
 		int innerIndex = -1;
@@ -40,24 +39,33 @@ public class StudentAI extends AI {
 		int j = 0;
 		for(Vector<Move> vector : moves) {
 			for(Move move : vector) {
-				board.makeMove(move, player);
-				int score = board.whiteCount - board.blackCount;
-				moveScore.add(score);
-				if(score > max) {
-					max = score;
+        board.makeMove(move, player);
+        int score;
+        if(player == 1){
+		      score = board.blackCount - board.whiteCount;
+        }
+        else
+        {
+          score =  board.whiteCount - board.blackCount;
+				}
+        //moveScore.add(score);
+				//System.out.println("SCORE: " + score);
+        if(score > max) {
+       		max = score;
 					index = i;
 					innerIndex = j;
 				}
-				board.Undo();
+	      board.Undo();
 				j++;
 			}
 			i++;
-		}
 		
-		
-		Move bestMove = moves.get(index).get(innerIndex);
-		return bestMove;
-	}
+    }
+	
+	  //System.out.println("Index: " + index + ", Inner Index: " + innerIndex);	
+    Move bestMove = moves.get(index).get(innerIndex);
+    return bestMove;
+  }
 }
 
 /*
