@@ -20,7 +20,7 @@ public class StudentAI extends AI {
         else
             player = 1;
         Vector<Vector<Move>> moves = board.getAllPossibleMoves(player);
-	//im commitng right here
+  //im commitng right here
         //Random randGen = new Random();
         //int index = randGen.nextInt(moves.size());
         //int innerIndex = randGen.nextInt(moves.get(index).size());
@@ -58,8 +58,7 @@ public class StudentAI extends AI {
 	      board.Undo();
 				j++;
 			}
-			i++;
-		
+			i++;	
     }
 	
 	  //System.out.println("Index: " + index + ", Inner Index: " + innerIndex);	
